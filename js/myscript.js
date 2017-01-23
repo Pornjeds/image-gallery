@@ -2,6 +2,7 @@ console.log('myscript initialzed');
 
 window.onload = function() {
   document.getElementById('file').addEventListener('change', handleFileSelect, true);
+  document.getElementById('filesToUpload').addEventListener('change', uploadMultipleFiles, true);
   //document.getElementById('file').disabled = true;
 
   // auth.onAuthStateChanged(function(user) {
@@ -21,11 +22,45 @@ var database = firebase.database();
 
 function handleFileSelect(evt) {
 	console.log('File Selected');
-  	evt.stopPropagation();
-  	evt.preventDefault();
-  	var file = evt.target.files[0];
+	evt.stopPropagation();
+	evt.preventDefault();
+	var file = evt.target.files[0];
 
-  	console.log('Filename: ' + file.name);
+	uploadFile(file);
+}
+
+function writeImagePath(name, downloadURLs) {
+	var postData = {
+	    name: name,
+	    downloadURLs: downloadURLs
+  	};
+  var newPostKey = firebase.database().ref().child('images/aGirl/').push().key;
+
+  var updates = {};
+  updates['/images/aGirl/' + newPostKey] = postData;
+
+  firebase.database().ref().update(updates);
+}
+
+function uploadMultipleFiles(evt){
+	console.log('Multiple Files Selected');
+	evt.stopPropagation();
+  	evt.preventDefault();
+	//var input = document.getElementById('filesToUpload');
+	input = evt.target.files;
+	//for every file...
+	for (var x = 0; x < input.length; x++) {
+		var file = input[x];
+		uploadFile(file);
+		// //add to list
+		// var li = document.createElement('li');
+		// li.innerHTML = 'File ' + (x + 1) + ':  ' + input.files[x].name;
+		// list.append(li);
+	}
+}
+
+function uploadFile(file){
+	console.log('Filename: ' + file.name);
 
   var metadata = {
     'contentType': file.type
@@ -51,11 +86,4 @@ function handleFileSelect(evt) {
     // [END onfailure]
   });
   // [END oncomplete]
-}
-
-function writeImagePath(name, downloadURLs) {
-  firebase.database().ref('images/agirl/').set({
-    name: name,
-    downloadURLs: downloadURLs
-  });
 }
