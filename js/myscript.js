@@ -3,18 +3,6 @@ console.log('myscript initialzed');
 window.onload = function() {
   document.getElementById('file').addEventListener('change', handleFileSelect, true);
   document.getElementById('filesToUpload').addEventListener('change', uploadMultipleFiles, true);
-  //document.getElementById('file').disabled = true;
-
-  // auth.onAuthStateChanged(function(user) {
-  //   if (user) {
-  //     console.log('Anonymous user signed-in.', user);
-  //     document.getElementById('file').disabled = false;
-  //   } else {
-  //     console.log('There was no anonymous session. Creating a new anonymous user.');
-  //     // Sign the user in anonymously since accessing Storage requires the user to be authorized.
-  //     auth.signInAnonymously();
-  //   }
-  // });
 }
 
 var storageRef = firebase.storage().ref();
@@ -46,16 +34,11 @@ function uploadMultipleFiles(evt){
 	console.log('Multiple Files Selected');
 	evt.stopPropagation();
   	evt.preventDefault();
-	//var input = document.getElementById('filesToUpload');
 	input = evt.target.files;
-	//for every file...
+	
 	for (var x = 0; x < input.length; x++) {
 		var file = input[x];
 		uploadFile(file);
-		// //add to list
-		// var li = document.createElement('li');
-		// li.innerHTML = 'File ' + (x + 1) + ':  ' + input.files[x].name;
-		// list.append(li);
 	}
 }
 
