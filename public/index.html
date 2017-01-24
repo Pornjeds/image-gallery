@@ -72,7 +72,7 @@
             <!-- Single File Uploader -->
             <div class="col-lg-6">
                 <p>Album</p>
-                <select id="albumSelector" onchange="renderImageGrid()">
+                <select id="albumSelector">
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
                     <option value="Wednesday">Wednesday</option>
@@ -83,6 +83,7 @@
                     <option value="aGirl">aGirl</option>
                     <option value="CupE">CupE</option>
                 </select>
+                <input type="button" value="Render Image" onclick="renderImageGrid()" />
             </div>
             <div class="col-lg-6">
                 <p>Create new Album</p>

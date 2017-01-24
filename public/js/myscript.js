@@ -7,6 +7,7 @@ window.onload = function() {
 
 var storageRef = firebase.storage().ref();
 var database = firebase.database();
+var IMAGE_RENDER_LIMIT = 10;
 
 //Render Image
 function renderImageGrid(){
@@ -16,24 +17,28 @@ function renderImageGrid(){
       
       var selectedAlbum = $('#albumSelector').val();
       var keywordsRef = firebase.database().ref('images/' + selectedAlbum);
-      keywordsRef.on('value', function(snapshot){
+      keywordsRef.once.('value').then(function(snapshot){
 
         console.log('keywordsRef Called');
         var obj = snapshot.val();
         var content = '';
+        var i = 0;
         $.each(obj, function( key, value ){
           $responseObj = value;
           
           //Construct RAW HTML Object
+          
           $.each($responseObj, function (akey, aValue){
-            console.log(akey + ':' + aValue);
+            console.log(i + ' :' + akey + ':' + aValue);
 
             if(akey === 'downloadURLs'){
+              i++;
               content = content + '<div class="col-lg-3 col-md-4 col-xs-6 thumb">\
                       <a class="thumbnail" href="' + aValue + '">\
                           <img class="img-responsive" src="' + aValue + '" alt="">\
                       </a>\
                   </div>';
+              if(i > IMAGE_RENDER_LIMIT) return false;
             }
           });
         });
