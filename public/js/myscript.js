@@ -27,20 +27,22 @@ function renderImageGrid(){
           $responseObj = value;
           
           //Construct RAW HTML Object
-          
           $.each($responseObj, function (akey, aValue){
             console.log(i + ' :' + akey + ':' + aValue);
 
             if(akey === 'downloadURLs'){
-              i++;
               content = content + '<div class="col-lg-3 col-md-4 col-xs-6 thumb">\
                       <a class="thumbnail" href="' + aValue + '">\
                           <img class="img-responsive" src="' + aValue + '" alt="">\
                       </a>\
                   </div>';
-              if(i > IMAGE_RENDER_LIMIT) return false;
             }
           });
+
+          i++;
+          if(i > IMAGE_RENDER_LIMIT){
+                return false;
+          }
         });
 
         $("#displaySection").html(content);
