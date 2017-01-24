@@ -70,14 +70,23 @@
             </div>
 
             <!-- Single File Uploader -->
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <p>Album</p>
                 <select id="albumSelector">
                     <option value="aGirl">aGirl</option>
                     <option value="CupE">CupE</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
                 </select>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-6">
+                <p>Create new Album</p>
+                <input type="text" value=""></input>
                 <input type="button" value="Create New Album"></input>
             </div>
             <div class="col-lg-6">
@@ -90,10 +99,11 @@
 
             <!-- Multiple File Uploader -->
             <div class="col-lg-12">
-                  <input name="filesToUpload[]" id="filesToUpload" type="file" multiple="" />
+                <p>Upload files</p>
+                <input name="filesToUpload[]" id="filesToUpload" type="file" multiple="" />
             </div>
 
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <!-- <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <a class="thumbnail" href="#">
                     <img class="img-responsive" src="http://placehold.it/400x300" alt="">
                 </a>
@@ -152,7 +162,7 @@
                 <a class="thumbnail" href="#">
                     <img class="img-responsive" src="http://placehold.it/400x300" alt="">
                 </a>
-            </div>
+            </div> -->
         </div>
 
         <hr>
@@ -161,7 +171,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Image Gallery 2017</p>
                 </div>
             </div>
         </footer>
@@ -175,6 +185,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+    <!-- Firebase JavaScript -->
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
     <script>
       // Initialize Firebase

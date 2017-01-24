@@ -22,10 +22,13 @@ function writeImagePath(name, downloadURLs) {
 	    name: name,
 	    downloadURLs: downloadURLs
   	};
-  var newPostKey = firebase.database().ref().child('images/aGirl/').push().key;
 
+  var selectedAlbum = $('#albumSelector').val();
+  console.log('Selected Album: ' + selectedAlbum);
+  //var newPostKey = firebase.database().ref().child('images/' + selectedAlbum + '/').push().key;
+  var key = name.replace('.','_').replace('(','').replace(')','');
   var updates = {};
-  updates['/images/aGirl/' + newPostKey] = postData;
+  updates['images/' + selectedAlbum + '/' + key] = postData;
 
   firebase.database().ref().update(updates);
 }
@@ -33,7 +36,7 @@ function writeImagePath(name, downloadURLs) {
 function uploadMultipleFiles(evt){
 	console.log('Multiple Files Selected');
 	evt.stopPropagation();
-  	evt.preventDefault();
+  evt.preventDefault();
 	input = evt.target.files;
 	
 	for (var x = 0; x < input.length; x++) {
@@ -51,7 +54,8 @@ function uploadFile(file){
 
   // Push to child path.
   // [START oncomplete]
-  storageRef.child('images/aGirl/' + file.name).put(file, metadata).then(function(snapshot) {
+  var selectedAlbum = $('#albumSelector').val();
+  storageRef.child('images/'+ selectedAlbum + '/' + file.name).put(file, metadata).then(function(snapshot) {
     console.log('Uploaded', snapshot.totalBytes, 'bytes.');
     console.log(snapshot.metadata);
     var url = snapshot.metadata.downloadURLs[0];
