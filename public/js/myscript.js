@@ -1,12 +1,49 @@
 console.log('myscript initialzed');
 
 window.onload = function() {
-  document.getElementById('file').addEventListener('change', handleFileSelect, true);
   document.getElementById('filesToUpload').addEventListener('change', uploadMultipleFiles, true);
+  renderImageGrid();
 }
 
 var storageRef = firebase.storage().ref();
 var database = firebase.database();
+
+//Render Image
+function renderImageGrid(){
+  try{
+      var loadingImage = '<img src="images/loading.gif"/>';
+      $("#displaySection").html(loadingImage);
+      
+      var selectedAlbum = $('#albumSelector').val();
+      var keywordsRef = firebase.database().ref('images/' + selectedAlbum);
+      keywordsRef.on('value', function(snapshot){
+
+        console.log('keywordsRef Called');
+        var obj = snapshot.val();
+        var content = '';
+        $.each(obj, function( key, value ){
+          $responseObj = value;
+          
+          //Construct RAW HTML Object
+          $.each($responseObj, function (akey, aValue){
+            console.log(akey + ':' + aValue);
+
+            if(akey === 'downloadURLs'){
+              content = content + '<div class="col-lg-3 col-md-4 col-xs-6 thumb">\
+                      <a class="thumbnail" href="' + aValue + '">\
+                          <img class="img-responsive" src="' + aValue + '" alt="">\
+                      </a>\
+                  </div>';
+            }
+          });
+        });
+
+        $("#displaySection").html(content);
+      });
+  }catch(err){
+    console.log(err.message);
+  }
+}
 
 function handleFileSelect(evt) {
 	console.log('File Selected');
@@ -63,10 +100,6 @@ function uploadFile(file){
 
     // 	WRITE IMAGE METADATA TO DATABASE
     writeImagePath(file.name, url);
-
-    // [START_EXCLUDE]
-    document.getElementById('linkbox').innerHTML = '<a href="' +  url + '">Click For File</a>';
-    // [END_EXCLUDE]
   }).catch(function(error) {
     // [START onfailure]
     console.error('Upload failed:', error);
