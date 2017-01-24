@@ -17,7 +17,7 @@ function renderImageGrid(){
       
       var selectedAlbum = $('#albumSelector').val();
       var keywordsRef = firebase.database().ref('images/' + selectedAlbum);
-      keywordsRef.once.('value').then(function(snapshot){
+      keywordsRef.once('value').then(function(snapshot){
 
         console.log('keywordsRef Called');
         var obj = snapshot.val();
