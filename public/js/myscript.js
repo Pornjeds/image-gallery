@@ -14,7 +14,7 @@ function renderImageGrid(){
   try{
       var loadingImage = '<img src="images/loading.gif"/>';
       $("#displaySection").html(loadingImage);
-      
+
       var selectedAlbum = $('#albumSelector').val();
       var keywordsRef = firebase.database().ref('images/' + selectedAlbum);
       keywordsRef.once('value').then(function(snapshot){
@@ -25,7 +25,7 @@ function renderImageGrid(){
         var i = 0;
         $.each(obj, function( key, value ){
           $responseObj = value;
-          
+
           //Construct RAW HTML Object
           $.each($responseObj, function (akey, aValue){
             console.log(i + ' :' + akey + ':' + aValue);
@@ -61,6 +61,43 @@ function handleFileSelect(evt) {
 	uploadFile(file);
 }
 
+function createNewAlbum(){
+
+  var albumName = $('#albumName').val();
+  if(albumName == ''){
+    console.log('No album name');
+    alert('Please fill in an album name');
+  }
+
+  console.log('create new album: ' + albumName);
+
+  var albumRef = firebase.database().ref('Album/');
+  var albumList = new Array();
+
+  albumRef.once('value').then(function(snapshot){
+    console.log('album called');
+
+    var obj = snapshot.val();
+    console.log(obj);
+    $.each(obj, function(key, value){
+        console.log(key + ':' + value);
+        if(value != null)
+          albumList[key] = value;
+    });
+  });
+
+  console.log(albumList);
+
+  var newKey = albumList.length;
+  var newValue = albumName;
+  var updates = albumList;
+  
+  //albumRef.update(updates);
+    // $.each(albumList, function(key, value)){
+    //   console.log(key, value);
+    // }
+}
+
 function writeImagePath(name, downloadURLs) {
 	var postData = {
 	    name: name,
@@ -82,7 +119,7 @@ function uploadMultipleFiles(evt){
 	evt.stopPropagation();
   evt.preventDefault();
 	input = evt.target.files;
-	
+
 	for (var x = 0; x < input.length; x++) {
 		var file = input[x];
 		uploadFile(file);
