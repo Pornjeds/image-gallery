@@ -71,31 +71,9 @@ function createNewAlbum(){
 
   console.log('create new album: ' + albumName);
 
-  var albumRef = firebase.database().ref('Album/');
-  var albumList = new Array();
-
-  albumRef.once('value').then(function(snapshot){
-    console.log('album called');
-
-    var obj = snapshot.val();
-    console.log(obj);
-    $.each(obj, function(key, value){
-        console.log(key + ':' + value);
-        if(value != null)
-          albumList[key] = value;
-    });
-  });
-
-  console.log(albumList);
-
-  var newKey = albumList.length;
-  var newValue = albumName;
-  var updates = albumList;
-  
-  //albumRef.update(updates);
-    // $.each(albumList, function(key, value)){
-    //   console.log(key, value);
-    // }
+  $("albumSelector").append($("<option></option>")
+                    .attr("value",albumName)
+                    .text(albumName));
 }
 
 function writeImagePath(name, downloadURLs) {
