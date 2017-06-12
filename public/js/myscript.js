@@ -71,7 +71,7 @@ function createNewAlbum(){
 
   console.log('create new album: ' + albumName);
 
-  $("albumSelector").append($("<option></option>")
+  $("#albumSelector").append($("<option></option>")
                     .attr("value",albumName)
                     .text(albumName));
 }
