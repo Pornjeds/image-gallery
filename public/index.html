@@ -73,24 +73,14 @@
             <div class="col-lg-6">
                 <p>Album</p>
                 <select id="albumSelector">
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                    <option value="aGirl">aGirl</option>
-                    <option value="CupE">CupE</option>
-                    <option value="ETC">ETC</option>
-                    <option value="Gif">GIF</option>
+                    <option value="POM">POM</option>
                 </select>
                 <input type="button" value="Render Image" onclick="renderImageGrid()" />
             </div>
             <div class="col-lg-6">
-                <p>Create new Album</p>
+                <!-- <p>Create new Album</p>
                 <input type="text" value="" id="albumName"></input>
-                <input type="button" value="Create New Album" onclick="createNewAlbum()"></input>
+                <input type="button" value="Create New Album" onclick="createNewAlbum()"></input> -->
             </div>
 
             <!-- Multiple File Uploader -->
@@ -125,8 +115,8 @@
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Firebase JavaScript -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-    <script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script> -->
+    <!-- <script>
       // Initialize Firebase
       var config = {
         apiKey: "AIzaSyDQnhs3ZPfcuxB5IJExry-kg_QSFM16pkw",
@@ -136,6 +126,19 @@
         messagingSenderId: "369969000979"
       };
       firebase.initializeApp(config);
+    </script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyCN9ZN4H2doNTaP-WXD2uJvVgp6_RFe5Ac",
+        authDomain: "pom-the-many-watch.firebaseapp.com",
+        databaseURL: "https://pom-the-many-watch.firebaseio.com",
+        projectId: "pom-the-many-watch",
+        storageBucket: "pom-the-many-watch.appspot.com",
+        messagingSenderId: "262741138415"
+        };
+        firebase.initializeApp(config);
     </script>
 
     <script src=js/myscript.js></script>
